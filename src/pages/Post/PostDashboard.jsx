@@ -11,9 +11,12 @@ const PostDashboard = () => {
   async function getUser() {
     try {
       setLoding(true);
-      const resp = await axios.get("http://localhost:5000/api/post", {
-        withCredentials: true,
-      });
+      const resp = await axios.get(
+        "https://crudauth-backend.onrender.com/api/post",
+        {
+          withCredentials: true,
+        },
+      );
 
       //   console.log(resp.data.post);
       setMsg(resp.data.message);

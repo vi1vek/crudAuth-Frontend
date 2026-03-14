@@ -30,9 +30,13 @@ const PostCreate = () => {
     try {
       setLoding(true);
       const token = localStorage.getItem("token");
-      const resp = await axios.post("http://localhost:5000/api/post", data, {
-        withCredentials: true,
-      });
+      const resp = await axios.post(
+        "https://crudauth-backend.onrender.com/api/post",
+        data,
+        {
+          withCredentials: true,
+        },
+      );
 
       alert(resp.data.message);
       navigate("/products/getall");

@@ -8,7 +8,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       const resp = await axios.post(
-        "http://localhost:5000/api/user/logout",
+        "https://crudauth-backend.onrender.com/api/user/logout",
         {},
         { withCredentials: true },
       );

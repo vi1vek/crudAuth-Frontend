@@ -4,7 +4,7 @@ import { useState } from "react";
 import axios from "axios";
 const Signup = () => {
   const [showPassword, setShow] = useState(false);
-  const[loading,setLoding] =useState(false)
+  const [loading, setLoding] = useState(false);
   const [data, setData] = useState({
     name: "",
     email: "",
@@ -39,20 +39,21 @@ const Signup = () => {
       return alert("Password And Confirm Password Are Not Match.");
     }
 
-     try{
-        setLoding(true) 
-        const resp = await axios.post("http://localhost:5000/api/user/signup", data);
+    try {
+      setLoding(true);
+      const resp = await axios.post(
+        "https://crudauth-backend.onrender.com/api/user/signup",
+        data,
+      );
 
-        alert(resp.data.message);
-        navigate("/verify");
-        
-    }catch(err){
-        var fromBack = err.response.data.message
-        return alert(fromBack)
-        
-    }finally{
-        // alert("Signup failed!")
-        setLoding(false) 
+      alert(resp.data.message);
+      navigate("/verify");
+    } catch (err) {
+      var fromBack = err.response.data.message;
+      return alert(fromBack);
+    } finally {
+      // alert("Signup failed!")
+      setLoding(false);
     }
   };
   return (
@@ -131,7 +132,7 @@ const Signup = () => {
               onClick={handleSubmit}
               className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition duration-200 shadow-md cursor-pointer"
             >
-            {loading?"Loding...":"Signup"}
+              {loading ? "Loding..." : "Signup"}
             </button>
           </form>
           <p className="mt-6 text-center text-sm text-gray-600">

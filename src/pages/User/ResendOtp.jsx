@@ -25,7 +25,7 @@ const ResendOtp = () => {
     try {
       setLoding(true);
       const resp = await axios.post(
-        "http://localhost:5000/api/user/resend",
+        "https://crudauth-backend.onrender.com/api/user/resend",
         data,
       );
       alert(resp.data.message);
