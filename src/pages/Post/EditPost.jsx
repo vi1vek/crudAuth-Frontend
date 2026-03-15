@@ -1,13 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-const PostCreate = () => {
+const EditPost = () => {
+  const { id } = useParams();
   const [loading, setLoding] = useState(false);
-  const [data, setData] = useState({
-    title: "",
-    price: "",
-  });
+  const [data, setData] = useState({});
 
   const navigate = useNavigate();
   const handleChange = (e) => {
@@ -22,16 +20,20 @@ const PostCreate = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!data.title || !data.price) {
-      return alert("All Fields are required.");
-    }
+    // if (!data.title || !data.price) {
+    //   return alert("All Fields are required.");
+    // }
 
     try {
       setLoding(true);
-      const token = localStorage.getItem("token");
-      const resp = await axios.post("http://localhost:5000/api/post", data, {
-        withCredentials: true,
-      });
+
+      const resp = await axios.put(
+        `http://localhost:5000/api/post/update/${id}`,
+        data,
+        {
+          withCredentials: true,
+        },
+      );
 
       alert(resp.data.message);
       navigate("/products/getall");
@@ -39,16 +41,16 @@ const PostCreate = () => {
       var fromBack = err.response.data.message;
       return alert(fromBack);
     } finally {
-      // alert("Signup failed!")
       setLoding(false);
     }
   };
+
   return (
     <>
       <div className="min-h-screen bg-green-300 flex items-center justify-center p-4">
         <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8">
           <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">
-            Create Product
+            Update Product
           </h2>
           <form className="space-y-4">
             <div className="mb-3">
@@ -86,7 +88,7 @@ const PostCreate = () => {
               onClick={handleSubmit}
               className="w-full bg-green-600 hover:bg-green-700 text-white font-bold py-3 rounded-lg transition duration-200 shadow-md cursor-pointer"
             >
-              {loading ? "Loding..." : "Create"}
+              {loading ? "Loding..." : "Update"}
             </button>
           </form>
         </div>
@@ -95,4 +97,4 @@ const PostCreate = () => {
   );
 };
 
-export default PostCreate;
+export default EditPost;

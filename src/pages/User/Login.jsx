@@ -33,7 +33,7 @@ const Login = () => {
     try {
       setLoding(true);
       const resp = await axios.post(
-        "https://crudauth-backend.onrender.com/api/user/signin",
+        "http://localhost:5000/api/user/signin",
         data,
         { withCredentials: true },
       );
@@ -51,6 +51,7 @@ const Login = () => {
       setLoding(false);
     }
   };
+
   return (
     <div className="min-h-screen bg-green-300 flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8">
@@ -95,6 +96,12 @@ const Login = () => {
             {loading ? "Loding..." : "Login"}
           </button>
         </form>
+        <Link
+          to="/reset"
+          className="flex w-full text-green-800 justify-end font-semibold hover:underline"
+        >
+          Reset Password
+        </Link>
 
         <p className="mt-6 text-center text-sm text-gray-600">
           Don't have an account?

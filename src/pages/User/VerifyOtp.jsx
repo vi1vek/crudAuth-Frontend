@@ -26,7 +26,7 @@ const VerifyOtp = () => {
     try {
       setLoding(true);
       const resp = await axios.post(
-        "https://crudauth-backend.onrender.com/api/user/verify",
+        "http://localhost:5000/api/user/verify",
         data,
       );
       alert(resp.data.message);

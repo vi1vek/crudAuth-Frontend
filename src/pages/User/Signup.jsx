@@ -42,7 +42,7 @@ const Signup = () => {
     try {
       setLoding(true);
       const resp = await axios.post(
-        "https://crudauth-backend.onrender.com/api/user/signup",
+        "http://localhost:5000/api/user/signup",
         data,
       );
 

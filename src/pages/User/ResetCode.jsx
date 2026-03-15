@@ -1,8 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
 
-const ResendOtp = () => {
+const ResetCode = () => {
+  const { setEmail } = useContext(AuthContext);
   const navigate = useNavigate();
   const [loading, setLoding] = useState(false);
   const [data, setData] = useState({ email: "" });
@@ -25,11 +28,13 @@ const ResendOtp = () => {
     try {
       setLoding(true);
       const resp = await axios.post(
-        "http://localhost:5000/api/user/resend",
+        "http://localhost:5000/api/user/resetcode",
         data,
       );
+      //   console.log(data.email);
+      setEmail(data.email);
       alert(resp.data.message);
-      navigate("/verify");
+      navigate("/reset/password");
     } catch (err) {
       var fromBack = err.response.data.message;
       return alert(fromBack);
@@ -38,17 +43,17 @@ const ResendOtp = () => {
       setLoding(false);
     }
 
-    navigate("/verify");
+    navigate("/reset/password");
   };
 
   return (
     <div className="min-h-screen bg-green-200 flex items-center justify-center p-4">
       <div className="max-w-md w-full bg-white rounded-xl shadow-lg p-8">
         <h2 className="text-2xl font-bold text-gray-800 text-center mb-6">
-          Resend OTP
+          Reset Your Password
         </h2>
-        <p className="mt-6 text-center text-sm text-black-600 text-xl">
-          Enter your registered email for resend OTP.
+        <p className="mt-6 text-center text-black-600 text-1rem">
+          Enter your registered email.
         </p>
         <form action="" className="space-y-4">
           <input
@@ -73,4 +78,4 @@ const ResendOtp = () => {
   );
 };
 
-export default ResendOtp;
+export default ResetCode;

@@ -8,7 +8,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       const resp = await axios.post(
-        "https://crudauth-backend.onrender.com/api/user/logout",
+        "http://localhost:5000/api/user/logout",
         {},
         { withCredentials: true },
       );
@@ -19,7 +19,7 @@ const Navbar = () => {
     }
   };
   return (
-    <div className=" bg-green-400 w-full p-4">
+    <div className=" bg-green-400 w-full p-4 border-b-2 border-green-800">
       <header className="flex items-center justify-between max-w-7xl">
         <h2 className="flex text-2xl font-bold text-gray-800">CRUD and Auth</h2>
         <ul className="flex items-center space-x-8 text-gray-700 ">
